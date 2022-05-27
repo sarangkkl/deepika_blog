@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+<div class="container ">
+    <div class="row ">
+        <div class="col-md-6 mx-auto my-3">
+            <h1>Login</h1>
+            <form action="{% url 'login_handle' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Username</label>
+                    <input type="text" class="form-control" id="email" name="username" aria-describedby="emailHelp" placeholder="Enter username">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    <a href="{% url 'register_page' %}" class="nav-link">Dont have any account ? Sign up </a>
+                </div>
+                <button type="submit" class="btn btn-primary my-3">LOGIN</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock body %}

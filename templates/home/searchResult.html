@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h3 class="txet-center">Search Result {{count}}</h3>
+<div class="row my-5">
+    {% for x in result %}
+    <div class="col">
+        <div class="card w-75">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title">{{x.username}}</h5>
+                        <p class="card-text">{{x.bio}}</p>
+                        <a href="/accounts/follow_handle/{{x.id}}" class="btn btn-primary">Follow</a>
+                      </div>
+                </div>
+                <div class="col-md-6">
+                    <img src="/media/{{x.image}}" alt="" style="height:100px ;">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+
+    <div class="container mx-auto">
+
+        <div class="row">
+            {% for y in post %}
+            <div class="col-md-6">
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                      <div class="col-md-4">
+                        <img
+                          src="/media/{{y.image}}"
+                          alt="Trendy Pants and Shoes"
+                          class="img-fluid rounded-start"
+                        />
+                      </div>
+                      <div class="col-md-8">
+                        <div class="card-body">
+                          <h5 class="card-title">{{y.title}}</h5>
+                          <p class="card-text">
+                            {{y.content}}
+                          </p>
+                          <p class="card-text">
+                            <small class="text-muted">{{y.date_posted}}</small>
+                          </p>
+                          <a href="/post/article_detail/{{y.id}}">View More</a>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock body %}

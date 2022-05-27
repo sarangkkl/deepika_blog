@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container my-3">
+  <div class="row my-3">
+    <div class="col-md-6">
+      <form action="{% url 'handle_create_post' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-outline mb-4">
+          <input type="text" id="form1Example2" class="form-control" name="title"/>
+          <label class="form-label" for="form1Example2">Title</label>
+        </div>
+        <div class="form-outline mb-4">
+          <textarea class="form-control" id="form4Example3" rows="3" name="message"></textarea>
+          <label class="form-label" for="form4Example3">Tell us your mood ??</label>
+          
+        </div>
+        <div class=" mb-4">
+          <label class="form-label" for="customFile">Any Imagee</label>
+          <input type="file" class="form-control" id="customFile" required name="image"/>
+        </div>
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block mb-4">MAKE YOU DTWEET</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+
+        <div class="col-md-6">
+          <div class="card">
+            <!-- <div class="card-header">Total DTweet 48</div> -->
+            <div class="card-body">
+              <p class="card-title">Total DTweet <i class="fa-solid fa-arrow-right-long"></i> {{post.count}}</p>
+              <p class="card-title">Followers <i class="fa-solid fa-arrow-right-long"></i> {{following}}</p>
+              <p class="card-text">Toatl Likes <i class="fa-solid fa-arrow-right-long"></i> {{like_count}}</p>
+              <p class="card-text">Toatl DisLikes <i class="fa-solid fa-arrow-right-long"></i> {{dislike_count}}</p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card">
+            <form action="{% url 'searchUser' %}" class="container" method="POST">
+              {% csrf_token %}
+              <h5 class="text-cenetr">Search for user</h5>
+              <div class="input-group">
+                <div class="form-outline">
+                  <input type="search" id="form1" class="form-control" name="search"/>
+                  <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn btn-primary my-3">
+                  Search
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    {% for x in post %}
+    <div class="col-md-4">
+      <div class="card">
+        <img src="/media/{{x.image}}" class="card-img-top" alt="Fissure in Sandstone"
+          style="height: 300px; width: 355px;" />
+        <div class="card-body">
+          <h5 class="card-title">{{x.title}}</h5>
+          <p class="card-text">{{x.content}}</p>
+          <p><span class="badge badge-primary"><a href="/post/like_count/{{x.id}}"><i
+                  class="fa-solid fa-thumbs-up"></i></a>{{x.like_count}}</span>
+
+            <span class="badge badge-danger"><a href="/post/dislike_count/{{x.id}}"><i
+                  class="fa-solid fa-thumbs-down"></i></a>{{x.disliek_count}}</span>
+          </p>
+          <a href="/post/article_detail/{{x.id}}" class="btn btn-primary">View More</a>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+  {% endblock body %}

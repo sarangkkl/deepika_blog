@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="col-md-6 mx-auto my-5" style="border: 2px solid rgb(255 243 243);">
+    <form class="p-4" enctype="multipart/form-data" action="{%url 'signup_handle' %}" method="POST">
+        <!-- Email input -->
+        <h3 class="text-center">SIGN UP</h3>
+        {% csrf_token%}
+        <div class="form-outline mb-4">
+          <input type="text" id="form1Example1" class="form-control" name="username"/>
+          <label class="form-label" for="form1Example1">Username</label>
+        </div>
+      
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <input type="password" id="form1Example2" class="form-control" name="password"/>
+          <label class="form-label" for="form1Example2">Password</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="password" id="form1Example2" class="form-control" name="password2"/>
+          <label class="form-label" for="form1Example2">Repeat Password</label>
+        </div>
+        <div class="form-outline mb-4">
+          <input type="file" id="form1Example2" class="form-control" name="avatar"/>
+          <label class="form-label" for="form1Example2">Avatar</label>
+        </div>
+      
+        <!-- 2 column grid layout for inline styling -->
+        <div class="row mb-4">
+          <div class="col d-flex justify-content-center">
+            <!-- Checkbox -->
+            <div class="form-check">
+                <a href="{% url 'login_page' %}">Already Have Account ? Login</a>
+            </div>
+          </div>
+      
+          <div class="col">
+            <!-- Simple link -->
+            <a href="#!">Forgot password?</a>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block my-3">Register</button>
+        </div>
+      
+        <!-- Submit button -->
+    </form>
+
+</div>
+{% endblock body %}
